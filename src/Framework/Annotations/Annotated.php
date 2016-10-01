@@ -20,7 +20,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * @Annotation
  * @Target({"CLASS"})
  */
-class Annotated
+class Annotated implements Interfaces\AnnotationInterface
 {
     public $methods = [];
     public $properties = [];
