@@ -12,9 +12,15 @@
 namespace Tests\Annotations;
 
 use Onion\Framework\Annotations\Annotated;
+use Onion\Framework\Annotations\Interfaces\AnnotationInterface;
 
 class AnnotatedTest extends \PHPUnit_Framework_TestCase
 {
+    public function testImplementsAnnotationInterface()
+    {
+        $this->assertInstanceOf(AnnotationInterface::class, new Annotated());
+    }
+
     public function testMethodRetrieval()
     {
         $annotated = new Annotated();
