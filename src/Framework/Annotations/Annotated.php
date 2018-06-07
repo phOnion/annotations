@@ -1,13 +1,4 @@
-<?php
-/**
- * PHP Version 5.6.0
- *
- * @category Annotations
- * @package  Onion\Framework\Annotations
- * @author   Dimitar Dimitrov <daghostman.dd@gmail.com>
- * @license  MIT https://opensource.org/licenses/MIT
- * @link     https://github.com/phOnion/framework
- */
+<?php declare(strict_types=1);
 namespace Onion\Framework\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Target;
@@ -23,7 +14,6 @@ use Doctrine\Common\Annotations\Annotation\Target;
 class Annotated implements Interfaces\AnnotationInterface
 {
     public $methods = [];
-    public $properties = [];
 
     public function getMethods()
     {
@@ -33,15 +23,5 @@ class Annotated implements Interfaces\AnnotationInterface
     public function isMethodAnnotated($methodName)
     {
         return in_array($methodName, $this->methods, true);
-    }
-
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    public function isPropertyAnnotated($propertyName)
-    {
-        return in_array($propertyName, $this->properties, true);
     }
 }

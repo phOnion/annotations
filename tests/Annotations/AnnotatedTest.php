@@ -30,13 +30,4 @@ class AnnotatedTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(['test'], $annotated->getMethods());
         $this->assertTrue($annotated->isMethodAnnotated('test'));
     }
-
-    public function testPropertyRetrieval()
-    {
-        $annotated = new Annotated();
-        $annotated->properties[] = 'test';
-
-        $this->assertSame(['test'], $annotated->getProperties());
-        $this->assertTrue($annotated->isPropertyAnnotated('test'));
-    }
 }

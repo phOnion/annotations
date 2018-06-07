@@ -13,7 +13,7 @@ namespace Tests\Annotations\Factory;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Onion\Framework\Configuration;
 use Onion\Framework\Annotations\Factory\AnnotationReaderFactory;
 
@@ -34,7 +34,7 @@ class AnnotationReaderFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new AnnotationReaderFactory();
 
-        $this->assertInstanceOf(Reader::class, $factory($this->container->reveal()));
+        $this->assertInstanceOf(Reader::class, $factory->build($this->container->reveal()));
         $this->configuration->has('annotations')->shouldHaveBeenCalled();
         $this->container->get(Configuration::class)->shouldHaveBeenCalled();
     }
@@ -61,7 +61,7 @@ class AnnotationReaderFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new AnnotationReaderFactory();
 
-        $this->assertInstanceOf(Reader::class, $factory($this->container->reveal()));
+        $this->assertInstanceOf(Reader::class, $factory->build($this->container->reveal()));
         $this->configuration->get('annotations')->shouldHaveBeenCalled();
         $this->container->get(Configuration::class)->shouldHaveBeenCalled();
     }

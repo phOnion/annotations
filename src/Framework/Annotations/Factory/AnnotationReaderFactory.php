@@ -1,31 +1,22 @@
-<?php
-/**
- * PHP Version 5.6.0
- *
- * @category Object Factory
- * @package  Onion\Framework\Annotations\Factory
- * @author   Dimitar Dimitrov <daghostman.dd@gmail.com>
- * @license  MIT https://opensource.org/licenses/MIT
- * @link     https://github.com/phOnion/framework
- */
+<?php declare(strict_types=1);
 namespace Onion\Framework\Annotations\Factory;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
-use Interop\Container\ContainerInterface;
 use Onion\Framework\Configuration;
-use Onion\Framework\Interfaces\ObjectFactoryInterface;
+use Onion\Framework\Dependency\Interfaces\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
-class AnnotationReaderFactory implements ObjectFactoryInterface
+class AnnotationReaderFactory implements FactoryInterface
 {
     /**
      * @param ContainerInterface $container
      *
      * @return Reader
      */
-    public function __invoke(ContainerInterface $container)
+    public function build(ContainerInterface $container)
     {
         /**
          * @var ContainerInterface $configuration
