@@ -1,5 +1,6 @@
 {
     "name": "onion/annotations",
+    "description": "A minimal annotation package for aspect-based decorators complementing onion/framework",
     "keywords": ["annotations", "phOnion", "onion"],
     "authors": [
         {
