@@ -14,39 +14,35 @@ namespace Tests\Annotations\Factory;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\Cache;
 use Psr\Container\ContainerInterface;
-use Onion\Framework\Configuration;
+use Onion\Framework\container;
 use Onion\Framework\Annotations\Factory\AnnotationReaderFactory;
 
 class AnnotationReaderFactoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $container;
-    protected $configuration;
     protected function setUp()
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-        $this->configuration = $this->prophesize(ContainerInterface::class);
     }
 
     public function testMinimalObjectFromFactory()
     {
-        $this->configuration->has('annotations')->willReturn(false);
-        $this->container->get(Configuration::class)->willReturn($this->configuration->reveal());
+        $this->container->has('annotations')->willReturn(false);
 
         $factory = new AnnotationReaderFactory();
 
         $this->assertInstanceOf(Reader::class, $factory->build($this->container->reveal()));
-        $this->configuration->has('annotations')->shouldHaveBeenCalled();
-        $this->container->get(Configuration::class)->shouldHaveBeenCalled();
+        $this->container->has('annotations')->shouldHaveBeenCalled();
     }
 
-    public function testWithConfiguration()
+    public function testWithContainer()
     {
         /**
          * @var $cache Cache
          */
         $cache = $this->prophesize(Cache::class);
-        $this->configuration->has('annotations')->willReturn(true);
-        $this->configuration->get('annotations')->willReturn([
+        $this->container->has('annotations')->willReturn(true);
+        $this->container->get('annotations')->willReturn([
             'namespaces' => [
                 'Onion\Framework\Annotations'
             ],
@@ -56,13 +52,10 @@ class AnnotationReaderFactoryTest extends \PHPUnit_Framework_TestCase
             'cache' => Cache::class
         ]);
         $this->container->get(Cache::class)->willReturn($cache->reveal());
-        $this->container->get(Configuration::class)
-            ->willReturn($this->configuration->reveal());
 
         $factory = new AnnotationReaderFactory();
 
         $this->assertInstanceOf(Reader::class, $factory->build($this->container->reveal()));
-        $this->configuration->get('annotations')->shouldHaveBeenCalled();
-        $this->container->get(Configuration::class)->shouldHaveBeenCalled();
+        $this->container->get('annotations')->shouldHaveBeenCalled();
     }
 }
