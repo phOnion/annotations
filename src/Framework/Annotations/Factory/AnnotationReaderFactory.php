@@ -19,16 +19,7 @@ class AnnotationReaderFactory implements FactoryInterface
     {
         if ($container->has('annotations')) {
             $annotationConfig = $container->get('annotations');
-
-            if (array_key_exists('namespaces', $annotationConfig)) {
-                AnnotationRegistry::registerAutoloadNamespaces($annotationConfig['namespaces']);
-            }
-
-            if (array_key_exists('files', $annotationConfig)) {
-                foreach ($annotationConfig['files'] as $file) {
-                    AnnotationRegistry::registerFile($file);
-                }
-            }
+            AnnotationRegistry::registerLoader('class_exists');
 
             if (array_key_exists('cache', $annotationConfig)) {
                 return new CachedReader(
