@@ -12,16 +12,4 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * @Target({"CLASS"})
  */
 class Annotated implements Interfaces\AnnotationInterface
-{
-    public $methods = [];
-
-    public function getMethods(): iterable
-    {
-        return $this->methods;
-    }
-
-    public function isMethodAnnotated($methodName): bool
-    {
-        return in_array($methodName, $this->methods, true);
-    }
-}
+{}
